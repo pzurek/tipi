@@ -5,19 +5,19 @@ import "fmt"
 // Entity struct
 type Entity struct {
 	ID               *float64     `json:"Id,omitempty"`
-	Name             *string      `json:"Name"`
-	StartDate        *string      `json:"StartDate"`
-	EndDate          *string      `json:"EndDate"`
-	CreateDate       *string      `json:"CreateDate"`
-	ModifyDate       *string      `json:"ModifyDate"`
-	LastCommentDate  *string      `json:"LastCommentDate"`
-	PlannedStartDate *string      `json:"PlannedStartDate"`
-	PlannedEndDate   *string      `json:"PlannedStartDate"`
-	EntityType       *EntityType  `json:"EntityType"`
-	EntityState      *EntityState `json:"EntityState"`
-	Owner            *Owner       `json:"Owner"`
-	Project          *Project     `json:"Project"`
-	Team             *Team        `json:"Team"`
+	Name             *string      `json:"Name,omitempty"`
+	StartDate        *string      `json:"StartDate,omitempty"`
+	EndDate          *string      `json:"EndDate,omitempty"`
+	CreateDate       *string      `json:"CreateDate,omitempty"`
+	ModifyDate       *string      `json:"ModifyDate,omitempty"`
+	LastCommentDate  *string      `json:"LastCommentDate,omitempty"`
+	PlannedStartDate *string      `json:"PlannedStartDate,omitempty"`
+	PlannedEndDate   *string      `json:"PlannedStartDate,omitempty"`
+	EntityType       *EntityType  `json:"EntityType,omitempty"`
+	EntityState      *EntityState `json:"EntityState,omitempty"`
+	Owner            *Owner       `json:"Owner,omitempty"`
+	Project          *Project     `json:"Project,omitempty"`
+	Team             *Team        `json:"Team,omitempty"`
 }
 
 // EntityService struct

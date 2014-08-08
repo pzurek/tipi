@@ -9,9 +9,9 @@ type UserStory struct {
 
 // UserStoryResponse struct
 type UserStoryResponse struct {
-	NextURL     *string   `json:"Next,omitempty"`
-	PreviousURL *string   `json:"Previous,omitempty"`
-	UserStories *[]Entity `json:"Items"`
+	NextURL     *string  `json:"Next,omitempty"`
+	PreviousURL *string  `json:"Previous,omitempty"`
+	UserStories []Entity `json:"Items,omitempty"`
 }
 
 // UserStoryService struct
@@ -30,7 +30,7 @@ func (s *UserStoryService) Get(id string) (*Entity, *Response, error) {
 	resource := new(Entity)
 	resp, err := s.client.Do(req, &resource)
 	if err != nil {
-		return nil, nil, err
+		return nil, resp, err
 	}
 
 	return resource, resp, err

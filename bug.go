@@ -27,9 +27,9 @@ type Bug struct {
 
 // BugResponse struct
 type BugResponse struct {
-	NextURL     *string   `json:"Next,omitempty"`
-	PreviousURL *string   `json:"Previous,omitempty"`
-	Bugs        *[]Entity `json:"Items"`
+	NextURL     *string  `json:"Next,omitempty"`
+	PreviousURL *string  `json:"Previous,omitempty"`
+	Bugs        []Entity `json:"Items,omitempty"`
 }
 
 // BugService struct
@@ -50,7 +50,7 @@ func (s *BugService) Get(id string) (*Entity, *Response, error) {
 	resource := new(Entity)
 	resp, err := s.client.Do(req, &resource)
 	if err != nil {
-		return nil, nil, err
+		return nil, resp, err
 	}
 
 	return resource, resp, err
@@ -67,7 +67,7 @@ func (s *BugService) List() ([]Entity, error) {
 		return nil, err
 	}
 
-	resource = append(resource, *rp...)
+	resource = append(resource, rp...)
 
 	for next != nil {
 		rp, nx, _, err := s.getPage(*next)
@@ -75,13 +75,13 @@ func (s *BugService) List() ([]Entity, error) {
 			return nil, err
 		}
 		next = nx
-		resource = append(resource, *rp...)
+		resource = append(resource, rp...)
 	}
 
 	return resource, err
 }
 
-func (s *BugService) getPage(url string) (*[]Entity, *string, *Response, error) {
+func (s *BugService) getPage(url string) ([]Entity, *string, *Response, error) {
 
 	if url == "" {
 		url = "Bugs"
