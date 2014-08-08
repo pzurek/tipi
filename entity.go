@@ -20,43 +20,6 @@ type Entity struct {
 	Team             *Team        `json:"Team"`
 }
 
-// EntityType struct
-type EntityType struct {
-	ID   *float64 `json:"Id"`
-	Name *string  `json:"Name"`
-}
-
-// EntityState struct
-type EntityState struct {
-	ID   *float64 `json:"Id"`
-	Name *string  `json:"Name"`
-}
-
-// Owner struct
-type Owner struct {
-	ID        *float64 `json:"Id"`
-	FirstName *string  `json:"FirstName"`
-	LastName  *string  `json:"LastName"`
-}
-
-// Project struct
-type Project struct {
-	ID   *float64 `json:"Id"`
-	Name *string  `json:"Name"`
-}
-
-// Team struct
-type Team struct {
-	ID   *float64 `json:"Id"`
-	Name *string  `json:"Name"`
-}
-
-// type EntityResponse struct {
-// 	NextUrl     *string   `json:"Next,omitempty"`
-// 	PreviousUrl *string   `json:"Previous,omitempty"`
-// 	Bugs        *[]Entity `json:"Items"`
-// }
-
 // EntityService struct
 type EntityService struct {
 	client *Client
@@ -65,7 +28,7 @@ type EntityService struct {
 // Get func
 func (s *EntityService) Get(t, id string) (*Entity, *Response, error) {
 
-	url := fmt.Sprintf("%s/%s?format=json", t, id)
+	url := fmt.Sprintf("%s/%s", t, id)
 
 	req, err := s.client.NewRequest("GET", url, nil)
 	if err != nil {

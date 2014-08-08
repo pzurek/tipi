@@ -40,7 +40,7 @@ type BugService struct {
 // Get function
 func (s *BugService) Get(id string) (*Entity, *Response, error) {
 
-	url := fmt.Sprintf("Bugs/%s?format=json", id)
+	url := fmt.Sprintf("Bugs/%s", id)
 
 	req, err := s.client.NewRequest("GET", url, nil)
 	if err != nil {
@@ -84,7 +84,7 @@ func (s *BugService) List() ([]Entity, error) {
 func (s *BugService) getPage(url string) (*[]Entity, *string, *Response, error) {
 
 	if url == "" {
-		url = "Bugs?format=json"
+		url = "Bugs"
 	}
 
 	req, err := s.client.NewRequest("GET", url, nil)

@@ -17,8 +17,7 @@ const (
 
 var (
 	subdomain string
-	username  string
-	password  string
+	token     string
 )
 
 // Client struct
@@ -36,14 +35,13 @@ type Client struct {
 }
 
 // NewClient func
-func NewClient(dmn, usrname, passwd string, httpClient *http.Client) *Client {
+func NewClient(dmn, tkn string, httpClient *http.Client) *Client {
 	if httpClient == nil {
 		httpClient = http.DefaultClient
 	}
 
 	subdomain = dmn
-	username = usrname
-	password = passwd
+	token = tkn
 
 	c := &Client{client: httpClient, UserAgent: userAgent}
 	c.Entities = &EntityService{client: c}
@@ -58,7 +56,10 @@ func NewClient(dmn, usrname, passwd string, httpClient *http.Client) *Client {
 // NewRequest func
 func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Request, error) {
 
-	url := fmt.Sprintf("https://%s%s%s", subdomain, baseURLString, urlStr)
+	var url string
+
+	url = fmt.Sprintf("https://%s%s%s?format=json&token=%s", subdomain, baseURLString, urlStr, token)
+
 	log.Println(url)
 	buf := new(bytes.Buffer)
 	if body != nil {
@@ -72,8 +73,6 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	if err != nil {
 		return nil, err
 	}
-
-	req.SetBasicAuth(username, password)
 
 	req.Header.Add("User-Agent", c.UserAgent)
 
