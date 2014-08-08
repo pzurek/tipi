@@ -38,7 +38,7 @@ func (s *EntityService) Get(t, id string) (*Entity, *Response, error) {
 	resource := new(Entity)
 	resp, err := s.client.Do(req, &resource)
 	if err != nil {
-		return nil, nil, err
+		return nil, resp, err
 	}
 
 	return resource, resp, err

@@ -32,6 +32,7 @@ type Client struct {
 	Features    *FeatureService
 	Tasks       *TaskService
 	UserStories *UserStoryService
+	Comments    *CommentService
 }
 
 // NewClient func
@@ -49,6 +50,7 @@ func NewClient(dmn, tkn string, httpClient *http.Client) *Client {
 	c.Features = &FeatureService{client: c}
 	c.Tasks = &TaskService{client: c}
 	c.UserStories = &UserStoryService{client: c}
+	c.Comments = &CommentService{client: c}
 
 	return c
 }
