@@ -10,21 +10,6 @@ type Bug struct {
 	// CustomFields *[]CustomField `json:"CustomFields,omitempty"`
 }
 
-// type Priority struct {
-// 	Id   *float64 `json:"Id,omitempty"`
-// 	Name *string  `json:"Name,omitempty"`
-// }
-
-// type Severity struct {
-// 	Id   *float64 `json:"Id,omitempty"`
-// 	Name *string  `json:"Name,omitempty"`
-// }
-
-// type CustomField struct {
-// 	Name  *string `json:"Name,omitempty"`
-// 	Value *string `json:"Value,omitempty"`
-// }
-
 // BugResponse struct
 type BugResponse struct {
 	NextURL     *string  `json:"Next,omitempty"`

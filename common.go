@@ -1,22 +1,11 @@
 package tp
 
-// EntityType struct
-type EntityType struct {
-	ID   *float64 `json:"Id,omitempty"`
-	Name *string  `json:"Name,omitempty"`
-}
-
-// EntityState struct
-type EntityState struct {
-	ID   *float64 `json:"Id,omitempty"`
-	Name *string  `json:"Name,omitempty"`
-}
-
-// Owner struct
-type Owner struct {
-	ID        *float64 `json:"Id,omitempty"`
-	FirstName *string  `json:"FirstName,omitempty"`
-	LastName  *string  `json:"LastName,omitempty"`
+// Company struct
+type Company struct {
+	ID          *float64 `json:"Id,omitempty"`
+	Name        *string  `json:"Name,omitempty"`
+	URL         *string  `json:"Url,omitempty"`
+	Description *string  `json:"Description,omitempty"`
 }
 
 // CustomField struct
@@ -26,10 +15,28 @@ type CustomField struct {
 	Value *string `json:"Value,omitempty"`
 }
 
-// Role struct
-type Role struct {
+// EntityState struct
+type EntityState struct {
 	ID   *float64 `json:"Id,omitempty"`
 	Name *string  `json:"Name,omitempty"`
+}
+
+// EntityType struct
+type EntityType struct {
+	ID   *float64 `json:"Id,omitempty"`
+	Name *string  `json:"Name,omitempty"`
+}
+
+// Iteration struct
+type Iteration struct {
+	ID *float64 `json:"Id,omitempty"`
+}
+
+// Owner struct
+type Owner struct {
+	ID        *float64 `json:"Id,omitempty"`
+	FirstName *string  `json:"FirstName,omitempty"`
+	LastName  *string  `json:"LastName,omitempty"`
 }
 
 // Priority struct
@@ -46,15 +53,14 @@ type Process struct {
 	Description *string  `json:"Description,omitempty"`
 }
 
-// Company struct
-type Company struct {
-	ID          *float64 `json:"Id,omitempty"`
-	Name        *string  `json:"Name,omitempty"`
-	URL         *string  `json:"Url,omitempty"`
-	Description *string  `json:"Description,omitempty"`
+// Role struct
+type Role struct {
+	ID   *float64 `json:"Id,omitempty"`
+	Name *string  `json:"Name,omitempty"`
 }
 
-// Iteration struct
-type Iteration struct {
-	ID *float64 `json:"Id,omitempty"`
+// Severity struct
+type Severity struct {
+	ID   *float64 `json:"Id,omitempty"`
+	Name *string  `json:"Name,omitempty"`
 }
