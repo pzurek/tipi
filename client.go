@@ -5,8 +5,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
+	"strings"
 )
 
 const (
@@ -27,12 +27,13 @@ type Client struct {
 	client    *http.Client
 	UserAgent string
 
-	Entities    *EntityService
 	Bugs        *BugService
+	Comments    *CommentService
+	Entities    *EntityService
 	Features    *FeatureService
 	Tasks       *TaskService
+	Users       *UserService
 	UserStories *UserStoryService
-	Comments    *CommentService
 }
 
 // NewClient func
@@ -45,12 +46,14 @@ func NewClient(dmn, tkn string, httpClient *http.Client) *Client {
 	token = tkn
 
 	c := &Client{client: httpClient, UserAgent: userAgent}
-	c.Entities = &EntityService{client: c}
+
 	c.Bugs = &BugService{client: c}
+	c.Comments = &CommentService{client: c}
+	c.Entities = &EntityService{client: c}
 	c.Features = &FeatureService{client: c}
 	c.Tasks = &TaskService{client: c}
+	c.Users = &UserService{client: c}
 	c.UserStories = &UserStoryService{client: c}
-	c.Comments = &CommentService{client: c}
 
 	return c
 }
@@ -59,10 +62,12 @@ func NewClient(dmn, tkn string, httpClient *http.Client) *Client {
 func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Request, error) {
 
 	var url string
+	if strings.Contains(urlStr, "?") {
+		url = fmt.Sprintf("https://%s%s%s&format=json&token=%s", subdomain, baseURLString, urlStr, token)
+	} else {
+		url = fmt.Sprintf("https://%s%s%s?format=json&token=%s", subdomain, baseURLString, urlStr, token)
+	}
 
-	url = fmt.Sprintf("https://%s%s%s?format=json&token=%s", subdomain, baseURLString, urlStr, token)
-
-	log.Println(url)
 	buf := new(bytes.Buffer)
 	if body != nil {
 		err := json.NewEncoder(buf).Encode(body)
@@ -81,7 +86,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	return req, nil
 }
 
-// Do func
+// Do function
 func (c *Client) Do(req *http.Request, v interface{}) (*Response, error) {
 	resp, err := c.client.Do(req)
 
