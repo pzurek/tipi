@@ -82,6 +82,7 @@ func (c *Client) NewRequest(method, urlStr string, body interface{}) (*http.Requ
 	}
 
 	req.Header.Add("User-Agent", c.UserAgent)
+	req.Header.Add("Content-Type", "application/json; charset=utf-8")
 
 	return req, nil
 }
